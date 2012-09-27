@@ -230,12 +230,12 @@
 		 BOOL completedChanged = completed != _completed;
 		 BOOL totalChanged = total != _total;
 		 if (completedChanged || totalChanged) {
-			  completedChanged ? [self willChangeValueForKey: @"completed"] : nil;
-			  totalChanged ? [self willChangeValueForKey: @"total"] : nil;
+			 if (completedChanged) [self willChangeValueForKey: @"completed"];
+			 if (totalChanged) [self willChangeValueForKey: @"total"];
             _completed = completed;
             _total = total;
-			  completedChanged ? [self didChangeValueForKey: @"completed"] : nil;
-			  totalChanged ? [self didChangeValueForKey: @"total"] : nil;
+			 if (completedChanged) [self didChangeValueForKey: @"completed"];
+			 if (totalChanged) [self didChangeValueForKey: @"total"];
 		  }
     }
 
