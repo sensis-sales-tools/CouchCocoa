@@ -25,6 +25,7 @@
 
 
 @interface CouchReplication ()
+@property (nonatomic, readwrite, getter = wasManuallyStopped) BOOL manuallyStopped;
 @property (nonatomic, readwrite) BOOL running;
 @property (nonatomic, readwrite, copy) NSString* status;
 @property (nonatomic, readwrite) unsigned completed, total;
@@ -123,6 +124,8 @@
     [NSObject cancelPreviousPerformRequestsWithTarget: self selector: @selector(start) object: nil];
     if (_running)
         return nil;
+	
+	self.manuallyStopped = NO;
     self.error = nil;
     self.running = YES;
     RESTOperation* op = [self operationToStart: YES];
@@ -180,13 +183,14 @@
 
 - (void) stop {
     if (_running) {
+		self.manuallyStopped = YES;
         [[self operationToStart: NO] start];
         [self stopped];
     }
 }
 
 
-@synthesize running = _running, status=_status, completed=_completed, total=_total, error = _error;
+@synthesize running = _running, status=_status, completed=_completed, total=_total, error = _error, manuallyStopped=_manuallyStopped;
 @synthesize mode=_mode, remoteURL = _remote;
 
 

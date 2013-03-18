@@ -91,6 +91,7 @@ typedef enum {
 - (void) stop;
 
 @property (nonatomic, readonly) BOOL running;
+@property (nonatomic, readonly, getter = wasManuallyStopped) BOOL manuallyStopped;
 
 /** The current status string from the server, if active, else nil (observable).
     Usually of the form "Processed 123 / 123 changes". */

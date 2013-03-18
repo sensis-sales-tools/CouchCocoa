@@ -147,7 +147,6 @@
     return op;
 }
 
-
 - (void) didLoadFromDocument {
     // subclasses can override this
 }
